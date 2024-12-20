@@ -1,11 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from "react-native";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 export default function App() {
+  const [count, setCount] = useState(0);
+
+  const handleCountPress = (operation) => {
+    if (operation === "+") {
+      setCount(count + 1);
+    } else if (operation === "-") {
+      setCount(count - 1);
+    } else {
+      return;
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleCountPress("+")}
+      >
+        <Text style={styles.buttonText}>+</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.text}>{count}</Text>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleCountPress("-")}
+      >
+        <Text style={styles.buttonText}>-</Text>
+      </TouchableOpacity>
+      <NavigationBar />
     </View>
   );
 }
@@ -13,8 +40,33 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    // alignItems: "center",
+    // justifyContent: "center",
+  },
+  text: {
+    fontSize: 32,
+    fontWeight: "bolder",
+  },
+  button: {
+    backgroundColor: "deepskyblue",
+    // padding: 16,
+    // paddingHorizontal: 40,
+    // margin: 16,
+    // width: "50%",
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 32,
   },
 });
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "white",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
